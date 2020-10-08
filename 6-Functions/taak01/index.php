@@ -1,9 +1,9 @@
 <?php
-$woordje="Hallo";
-$zinnetje="mooie blauwe planeet";
-$heleZin=$woordje . $zinnetje;
 function zetTweeWoordenAanElkaar(){
-$heleZin
+    $woordje="Hallo";
+    $zinnetje="mooie blauwe planeet";
+    $heleZin=$woordje . " " . $zinnetje;
+    echo $heleZin;
 }
 zetTweeWoordenAanElkaar();
 ?>
