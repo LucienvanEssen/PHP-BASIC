@@ -16,7 +16,7 @@
 
     <p>Op deze website kun je checken welk datatype je hebt ingevoerd.</p>
     <P>Vul hieronder een getal, een decimaal, een tekst of de tekst true/false in en klik op check!</p> 
-    <input type="text" name="input"><!-- dit laten staan! -->
+    <input required type="text" name="input"><!-- dit laten staan! -->
     <button type="submit" name="submit">Check</button><!-- dit laten staan! -->
     <p>Het datatype van de waarde: <?php getInput() ?> is een
     <?php 
@@ -32,6 +32,10 @@
       else if(filter_var($_GET['input'], FILTER_VALIDATE_FLOAT))
       {
         echo "kommagetal" ;
+      }
+      else
+      {
+        echo "string" ;
       }
     }
       

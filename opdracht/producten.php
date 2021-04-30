@@ -38,33 +38,34 @@
         </table>
 
     <p>Vul hieronder het productnummer in van het product wat je wilt bestellen en de hoeveelheid.</p> 
-    <p><label>productnummer: </label><input type="text" name="productnummer"> &nbsp;&nbsp;<label>aantal: </label><input type="text" name="aantal"></p><!-- dit laten staan! -->
+    <p><label>productnummer: </label><input required type="text" name="productnummer"> &nbsp;&nbsp;<label>aantal: </label><input required type="text" name="aantal"></p><!-- dit laten staan! -->
     
     <p>Vul je leeftijd in voor korting</p>
-    <p><label>leeftijd: </label><input type="text" name="leeftijd"></p><!-- dit laten staan! -->
+    <p><label>leeftijd: </label><input required type="text" name="leeftijd"></p><!-- dit laten staan! -->
     <p><button type="submit" name="submit">Bereken totaal</button></p><!-- dit laten staan! -->
     <p>voor <?php getAmount(); ?> x het product: <?php getProductNr(); ?> betaal je:
     
-    <?php if(isset($_GET['productnummer'])&&isset($_GET['aantal'])&&$_GET['productnummer']>=0&&$_GET['productnummer']<count($producten)) 
-    
-    echo number_format( $prijzen[$_GET['productnummer']] * $_GET['aantal'],2 ) ?>
+    <?php if(isset($_GET['productnummer'])&&!empty($_GET['productnummer'])&&isset($_GET['aantal'])&&!empty($_GET['aantal'])&&$_GET['productnummer']>=0&&$_GET['productnummer']<count($producten)) {
+    $subTotaal=$prijzen[$_GET['productnummer']] * $_GET['aantal']; 
+    echo number_format ( $subTotaal,2 );}?>
 
+   
     </p>
     <p>je bent <?php getAge(); ?> je korting is: 
     <?php 
-    
+    $korting=0;
     if(isset($_GET['leeftijd'])){
       if($_GET['leeftijd']<=19&&$_GET['leeftijd']>=16)
-      {
-        echo $_GET['leeftijd'] . " cent" ;
+      {$korting=$_GET['leeftijd'] / 100;
+        echo $korting;
       
       }
       else if($_GET['leeftijd']<16)
-      {
-        echo " 1 euro" ;
+      {$korting=1;
+        echo $korting ;
       }
     } ?> </p>
-
+<p>je totaalprijs is: <?php if(isset($subTotaal)) echo $subTotaal - $korting ?></p>
     </form><!-- dit laten staan! -->
     <?php include "includes/footer.php" ?>
   </body>
